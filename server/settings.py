@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2nz4$jcl%3kj_6a8rc%!%sg+we^i7^ty6*b5*y)79la=7k*)7b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.1.63', '0.0.0.0', '192.168.1.112:4400']
+ALLOWED_HOSTS = ['192.168.1.63', 'ancient-plateau-91547.herokuapp.com']
 CORS_ORIGIN_WHITELIST = (
     '192.168.1.112:4400'
 )
