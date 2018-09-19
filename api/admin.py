@@ -10,6 +10,6 @@ class EmployeeAdmin(admin.ModelAdmin):
 admin.site.register(Employee, EmployeeAdmin)
 
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'customer_type', 'frequency', 'assign_to')
+    list_display = ('username', 'email', 'customer_type', 'frequency', 'assign_to', 'cell_phone', 'profit_month')
 
 admin.site.register(Client, ClientAdmin)
