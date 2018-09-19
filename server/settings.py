@@ -14,18 +14,18 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2nz4$jcl%3kj_6a8rc%!%sg+we^i7^ty6*b5*y)79la=7k*)7b'
 
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '2nz4$jcl%3kj_6a8rc%!%sg+we^i7^tdfwefey6*b5*y)79la=7k*)7b')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['192.168.1.63', 'ancient-plateau-91547.herokuapp.com']
+# DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+ALLOWED_HOSTS = ['ancient-plateau-91547.herokuapp.com', '192.168.1.63', ]
 CORS_ORIGIN_WHITELIST = (
     '192.168.1.112:4400'
 )
