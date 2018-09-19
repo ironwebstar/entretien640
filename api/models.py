@@ -60,5 +60,3 @@ class Prospect(CustomUser):
     class Meta:
         verbose_name = 'Prospects'
         verbose_name_plural = 'Prospects'
-
-class Invoice(models.Model):
