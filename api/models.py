@@ -16,46 +16,70 @@ class Employee(CustomUser):
     Supervisor = models.CharField(max_length=100, blank=True)
     note = models.TextField(max_length=500, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
     class Meta:
         verbose_name = 'Employee'
         verbose_name_plural = 'Employee'
+        ordering = ('id', )
 
 class Client(CustomUser):
+
     is_admin = models.BooleanField(default=False)
     TYPE_VALUE = (
-        ('Residential', 'Residential'),
+        ('Résidentiel', 'Residential'),
         ('Commercial', 'Commercial'),
         ('Occasionnel', 'Occasionnel'),
     )
-    customer_type = models.CharField(max_length=15, choices=TYPE_VALUE)
+    customer_type = models.CharField(max_length=15, choices=TYPE_VALUE, blank=True)
 
     FREQUENCY_VALUE = (
-        ('1x_semaine', '1x semaine'),
-        ('1x_2_semaines', '1x 2 semaines'),
-        ('1x_3_semaines', '1x 3 semaines'),
-        ('1x_mois', '1x mois'),
+        ('1x semaine', '1x semaine'),
+        ('2x semaine', '2x semaine'),
+        ('1x 2 semaines', '1x 2 semaines'),
+        ('1x 3 semaines', '1x 3 semaines'),
+        ('1x 4 semaines', '1x 4 semaines'),
     )
-    frequency = models.CharField(max_length=15, choices=FREQUENCY_VALUE)
-    assign_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    frequency = models.CharField(max_length=15, choices=FREQUENCY_VALUE, blank=True)
+    assign_to = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True)
     profit_month = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
 
     class Meta:
         verbose_name = 'Client'
         verbose_name_plural = 'Client'
 
+
 class Prospect(CustomUser):
     last_contact = models.DateTimeField(auto_now=True)
     ip_address = models.CharField(max_length=20)
     STAGES = (
-        ('missed_call_1', 'Missed call # 1'),
-        ('missed_call_2', 'Missed call # 2'),
-        ('rdv_submission', 'RDV submission'),
-        ('submission_feels', 'Submission Feels'),
-        ('new customer', 'New Customer'),
-        ('no_interested', 'No Interested'),
-        ('waiting', 'Waiting'),
+        ('Nouveau', 'Nouveau'),
+        ('Appel manqué #1', 'Appel manqué #1'),
+        ('Appel manqué #2', 'Appel manqué #2'),
+        ('Soumission RDV', 'Soumission RDV'),
+        ('Soumission envoyée', 'Soumission envoyée'),
+        ('Non intéressé', 'Non intéressé'),
+        ('En attente', 'En attente'),
+        ('Nouveau client', 'Nouveau client'),
     )
+    # STAGES = (
+    #     ('new customer', 'Nouveau'),
+    #     ('missed_call_1', 'Appel manqué #1'),
+    #     ('missed_call_2', 'Appel manqué #2'),
+    #     ('rdv_submission', 'Soumission RDV'),
+    #     ('submission_sent', 'Soumission envoyée'),
+    #     ('no_interested', 'Non intéressé'),
+    #     ('waiting', 'En attente'),
+    #     ('new_customer', 'Nouveau client'),
+    # )
     stage = models.CharField(max_length=15, choices=STAGES)
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
 
     class Meta:
         verbose_name = 'Prospects'
