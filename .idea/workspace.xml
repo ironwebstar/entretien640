@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e75311af-06c8-4f13-98a5-77fe4b47b7ab" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0002_auto_20180917_0606.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0003_auto_20180917_0615.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0004_auto_20180917_0617.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0005_client_profit_month.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0006_auto_20180919_0512.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0007_prospect.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0008_auto_20180921_0438.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0009_auto_20180923_2020.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0010_auto_20180924_1705.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/migrations/0011_auto_20180924_2329.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/migrations/0002_auto_20180916_1725.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/migrations/0003_auto_20180924_1229.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/api/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/models.py" afterPath="$PROJECT_DIR$/api/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/serializers.py" afterPath="$PROJECT_DIR$/api/serializers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/urls.py" afterPath="$PROJECT_DIR$/api/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/views.py" afterPath="$PROJECT_DIR$/api/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/settings.py" afterPath="$PROJECT_DIR$/server/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/users/models.py" afterPath="$PROJECT_DIR$/users/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -65,6 +45,16 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="30" column="30" lean-forward="true" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,7 +118,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
@@ -146,15 +136,6 @@
             <state relative-caret-position="299">
               <caret line="52" column="9" lean-forward="true" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api_prospect" pinned="false" current-in-tab="false">
-        <entry file="das://table:/a7a38ece/cde7148f-1ccc-4263-adfb-9741ebda7364/main.api_prospect">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -196,13 +177,13 @@
         <option value="$PROJECT_DIR$/server/urls.py" />
         <option value="$PROJECT_DIR$/api/viewsets.py" />
         <option value="$PROJECT_DIR$/api/routers.py" />
-        <option value="$PROJECT_DIR$/server/settings.py" />
         <option value="$PROJECT_DIR$/api/admin.py" />
         <option value="$PROJECT_DIR$/users/models.py" />
         <option value="$PROJECT_DIR$/api/serializers.py" />
         <option value="$PROJECT_DIR$/api/views.py" />
         <option value="$PROJECT_DIR$/api/models.py" />
         <option value="$PROJECT_DIR$/api/urls.py" />
+        <option value="$PROJECT_DIR$/server/settings.py" />
       </list>
     </option>
   </component>
@@ -591,14 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2987">
-          <caret line="171" column="0" lean-forward="true" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -768,6 +741,14 @@
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="30" column="30" lean-forward="true" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
