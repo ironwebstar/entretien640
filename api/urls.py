@@ -13,11 +13,19 @@ urlpatterns = [
     path('clients/create', views.ClientCreateView.as_view(), name='client_create'),
     path('clients/<int:id>/', views.ClientEditAPIView.as_view(), name='client_edit'),
 
+    path('count/client/', views.get_clientCount, name='client_count'),
+
     # Employee View
     path('employees/', views.EmployeeListView.as_view()),
     path('employees/create', views.EmployeeCreateView.as_view(), name='employee_create'),
     path('employees/<int:id>/', views.EmployeeEditAPIView.as_view(), name='employee_edit'),
 
+    path('count/employee/', views.get_employeeCount, name='employee_count'),
 
+    # Prospect View
     path('prospects/', views.ProspectListView.as_view()),
+    path('prospects/create', views.ProspectCreateView.as_view(), name='prospect_create'),
+    path('prospects/<int:id>/', views.ProspectEditAPIView.as_view(), name='prospect_edit'),
+
+    path('count/prospect/', views.get_prospectCount, name='prospect_count'),
 ]

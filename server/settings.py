@@ -25,9 +25,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '2nz4$jcl%3kj_6a8rc%!%sg+we^i7^
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-ALLOWED_HOSTS = ['ancient-plateau-91547.herokuapp.com', '192.168.1.201', ]
+ALLOWED_HOSTS = ['ancient-plateau-91547.herokuapp.com', '192.168.1.201', 'accidental-son.surge.sh']
 CORS_ORIGIN_WHITELIST = (
-    '192.168.1.112:4400'
+    '192.168.1.112:4400',
+    'accidental-son.surge.sh',
 )
 
 # Application definition
@@ -50,10 +51,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
     'api',
-
 ]
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -167,8 +165,7 @@ LOGIN_REDIRECT_URL = '/'
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
-
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
-
+SILENCED_SYSTEM_CHECKS = ["auth.W004"]

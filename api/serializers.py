@@ -5,28 +5,49 @@ from . import models
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Employee
-        fields = ('id', 'email', 'first_name', 'last_name', 'city', 'position', 'Supervisor',
-                  'email', 'cell_phone', 'note')
+        fields = "__all__"
+        extra_kwargs = {'password': {'required': False}, 'username': {'required': False}}
 
 class ClientSerializer(serializers.ModelSerializer):
-    assign_to = serializers.PrimaryKeyRelatedField(read_only=True)
+    assign_to = serializers.PrimaryKeyRelatedField(read_only=True, required=False)
+
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['assign_to'] = EmployeeSerializer(instance.assign_to).data
+        try:
+            response['assign_to'] = EmployeeSerializer(instance.assign_to).data
+        except:
+            response['assign_to'] = 4
         return response
 
     def to_internal_value(self, data):
         self.fields['assign_to'] = serializers.PrimaryKeyRelatedField(
-            queryset=models.Employee.objects.all())
+            queryset=models.Employee.objects.all(), required=False)
         return super(ClientSerializer, self).to_internal_value(data)
 
     class Meta:
         model = models.Client
-        fields = ('id', 'email', 'first_name', 'last_name', 'city',
-                  'cell_phone', 'customer_type', 'frequency', 'assign_to', 'profit_month')
+        fields = "__all__"
         depth = 2
-
+        extra_kwargs = {'password': {'required': False}, 'username': {'required': False}}
+        # extra_kwargs = {'assign_to': {'required': False}}
 class ProspectSerializer(serializers.ModelSerializer):
+    assign_to = serializers.PrimaryKeyRelatedField(read_only=True, required=False)
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        try:
+            response['assign_to'] = EmployeeSerializer(instance.assign_to).data
+        except:
+            response['assign_to'] = 5
+        return response
+
+    def to_internal_value(self, data):
+        self.fields['assign_to'] = serializers.PrimaryKeyRelatedField(
+            queryset=models.Employee.objects.all(), required=False)
+        return super(ProspectSerializer, self).to_internal_value(data)
+
     class Meta:
         model = models.Prospect
-        fields = ('id', 'email', 'first_name', 'last_name', 'city', 'last_contact', 'ip_address', 'cell_phone', 'stage')
+        fields = "__all__"
+        depth = 2
+        extra_kwargs = {'password': {'required': False}, 'username': {'required': False}}

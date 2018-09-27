@@ -26,14 +26,22 @@ class Employee(CustomUser):
 
 class Client(CustomUser):
 
-    is_admin = models.BooleanField(default=False)
     TYPE_VALUE = (
         ('Résidentiel', 'Residential'),
         ('Commercial', 'Commercial'),
         ('Occasionnel', 'Occasionnel'),
     )
-    customer_type = models.CharField(max_length=15, choices=TYPE_VALUE, blank=True)
-
+    ESTIMATED_VALUE = (
+        ('1 heure et demi', '1 heure et demi'), ('2 heures', '2 heures'),
+        ('2 heures et demi', '2 heures et demi'), ('3 heures', '3 heures'),
+        ('3 heures et demi', '3 heures et demi'), ('4 heures', '4 heures'),
+        ('4 heures et demi', '4 heures et demi'), ('5 heures', '5 heures'),
+        ('5 heures et demi', '5 heures et demi'), ('6 heures', '6 heures'),
+        ('6 heures et demi', '6 heures et demi'), ('7 heures', '7 heures'),
+        ('7 heures et demi', '7 heures et demi'), ('8 heures', '8 heures'),
+        ('8 heures et demi', '8 heures et demi'), ('9 heures', '9 heures'),
+        ('9 heures et demi', '9 heures et demi'), ('10 heures', '10 heures'),
+    )
     FREQUENCY_VALUE = (
         ('1x semaine', '1x semaine'),
         ('2x semaine', '2x semaine'),
@@ -41,9 +49,32 @@ class Client(CustomUser):
         ('1x 3 semaines', '1x 3 semaines'),
         ('1x 4 semaines', '1x 4 semaines'),
     )
+    REPLACEMENT_OPTION = (
+        ('Reporté le ménage', 'Reporté le ménage'),
+        ('Envoyé un remplaçant', 'Envoyé un remplaçant'),
+    )
+    DAYS_OPTION = (
+        ('Lun', 'Lun'), ('Mar', 'Mar'), ('Mer', 'Mer'),
+        ('Jeu', 'Jeu'), ('Ven', 'Ven'), ('Sam', 'Sam'),
+        ('Dim' ,'Dim'),
+    )
+    PAYMENT_OPTION = (
+        ('Virement Interac', 'Virement Interac'), ('Argent comptant', 'Argent comptant'),
+        ('Dépôt direct', 'Dépôt direct'), ('Chèque', 'Chèque'), ('Carte de crédit', 'Carte de crédit'),
+    )
+    customer_type = models.CharField(max_length=15, choices=TYPE_VALUE, blank=True)
+    is_admin = models.BooleanField(default=False)
     frequency = models.CharField(max_length=15, choices=FREQUENCY_VALUE, blank=True)
-    assign_to = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True)
-    profit_month = models.IntegerField(blank=True)
+    assign_to = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=True, default=1)
+    profit_month = models.IntegerField(blank=True, null=True)
+    login_email = models.EmailField(blank=True, max_length=100)
+    estimated_time = models.CharField(max_length=15, choices=ESTIMATED_VALUE, blank=True)
+    replacement = models.CharField(max_length=30, choices=REPLACEMENT_OPTION, blank=True)
+    days = models.CharField(max_length=5, choices=DAYS_OPTION, blank=True)
+    code_key = models.IntegerField(blank=True, null=True)
+    animals = models.CharField(max_length=100, blank=True)
+    payment = models.CharField(max_length=30, choices=PAYMENT_OPTION, blank=True)
+    remarks = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -52,10 +83,40 @@ class Client(CustomUser):
         verbose_name = 'Client'
         verbose_name_plural = 'Client'
 
-
 class Prospect(CustomUser):
-    last_contact = models.DateTimeField(auto_now=True)
-    ip_address = models.CharField(max_length=20)
+    last_contact = models.DateTimeField(auto_now=True, blank=True)
+    ip_address = models.CharField(max_length=20, blank=True)
+    ESTIMATED_VALUE = (
+        ('1 heure et demi', '1 heure et demi'), ('2 heures', '2 heures'),
+        ('2 heures et demi', '2 heures et demi'), ('3 heures', '3 heures'),
+        ('3 heures et demi', '3 heures et demi'), ('4 heures', '4 heures'),
+        ('4 heures et demi', '4 heures et demi'), ('5 heures', '5 heures'),
+        ('5 heures et demi', '5 heures et demi'), ('6 heures', '6 heures'),
+        ('6 heures et demi', '6 heures et demi'), ('7 heures', '7 heures'),
+        ('7 heures et demi', '7 heures et demi'), ('8 heures', '8 heures'),
+        ('8 heures et demi', '8 heures et demi'), ('9 heures', '9 heures'),
+        ('9 heures et demi', '9 heures et demi'), ('10 heures', '10 heures'),
+    )
+    FREQUENCY_VALUE = (
+        ('1x semaine', '1x semaine'),
+        ('2x semaine', '2x semaine'),
+        ('1x 2 semaines', '1x 2 semaines'),
+        ('1x 3 semaines', '1x 3 semaines'),
+        ('1x 4 semaines', '1x 4 semaines'),
+    )
+    REPLACEMENT_OPTION = (
+        ('Reporté le ménage', 'Reporté le ménage'),
+        ('Envoyé un remplaçant', 'Envoyé un remplaçant'),
+    )
+    DAYS_OPTION = (
+        ('Lun', 'Lun'), ('Mar', 'Mar'), ('Mer', 'Mer'),
+        ('Jeu', 'Jeu'), ('Ven', 'Ven'), ('Sam', 'Sam'),
+        ('Dim' ,'Dim'),
+    )
+    PAYMENT_OPTION = (
+        ('Virement Interac', 'Virement Interac'), ('Argent comptant', 'Argent comptant'),
+        ('Dépôt direct', 'Dépôt direct'), ('Chèque', 'Chèque'), ('Carte de crédit', 'Carte de crédit'),
+    )
     STAGES = (
         ('Nouveau', 'Nouveau'),
         ('Appel manqué #1', 'Appel manqué #1'),
@@ -66,17 +127,18 @@ class Prospect(CustomUser):
         ('En attente', 'En attente'),
         ('Nouveau client', 'Nouveau client'),
     )
-    # STAGES = (
-    #     ('new customer', 'Nouveau'),
-    #     ('missed_call_1', 'Appel manqué #1'),
-    #     ('missed_call_2', 'Appel manqué #2'),
-    #     ('rdv_submission', 'Soumission RDV'),
-    #     ('submission_sent', 'Soumission envoyée'),
-    #     ('no_interested', 'Non intéressé'),
-    #     ('waiting', 'En attente'),
-    #     ('new_customer', 'Nouveau client'),
-    # )
-    stage = models.CharField(max_length=15, choices=STAGES)
+    is_admin = models.BooleanField(default=False)
+    frequency = models.CharField(max_length=15, choices=FREQUENCY_VALUE, blank=True)
+    assign_to = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=True, default=1)
+    profit_month = models.IntegerField(blank=True, null=True)
+    login_email = models.EmailField(blank=True, max_length=100)
+    estimated_time = models.CharField(max_length=15, choices=ESTIMATED_VALUE, blank=True)
+    replacement = models.CharField(max_length=30, choices=REPLACEMENT_OPTION, blank=True)
+    days = models.CharField(max_length=5, choices=DAYS_OPTION, blank=True)
+    code_key = models.IntegerField(blank=True, null=True)
+    animals = models.CharField(max_length=100, blank=True)
+    payment = models.CharField(max_length=30, choices=PAYMENT_OPTION, blank=True)
+    stage = models.CharField(max_length=15, choices=STAGES, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -84,3 +146,4 @@ class Prospect(CustomUser):
     class Meta:
         verbose_name = 'Prospects'
         verbose_name_plural = 'Prospects'
+
