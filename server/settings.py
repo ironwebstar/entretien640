@@ -25,10 +25,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '2nz4$jcl%3kj_6a8rc%!%sg+we^i7^
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-ALLOWED_HOSTS = ['floating-brook-18937.herokuapp.com', '192.168.1.201', 'accidental-son.surge.sh']
+ALLOWED_HOSTS = ['floating-brook-18937.herokuapp.com', '192.168.1.77', ]
 CORS_ORIGIN_WHITELIST = (
-    '192.168.1.112:4400',
-    'accidental-son.surge.sh',
+    '192.168.1.112:4200',
+    'lackadaisical-texture.surge.sh',
 )
 
 # Application definition

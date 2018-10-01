@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import permissions, status
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, get_object_or_404, ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_auth.views import LoginView
 from rest_framework.response import Response
@@ -27,13 +28,21 @@ class CustomLoginView(LoginView):
                 status=200
             )
 
+class SmallPagination(PageNumberPagination):
+    page_size = 5
+
 class ClientListView(ListAPIView):
     serializer_class = serializers.ClientSerializer
+    pagination_class = SmallPagination
 
     def get(self, request, *args, **kwargs):
         clients = models.Client.objects.all()
         serializer = self.serializer_class(clients, context={'request': request}, many=True)
+        page = self.paginate_queryset(serializer.data)
+        serializer = self.get_paginated_response(page)
         return Response({'success': True, 'data': serializer.data})
+
+
 
 class ClientCreateView(APIView):
     serializer_class = serializers.ClientSerializer
@@ -179,13 +188,18 @@ class EmployeeEditAPIView(RetrieveUpdateDestroyAPIView):
         self.perform_destroy(instance)
         return Response({'success': True}, status=status.HTTP_204_NO_CONTENT)
 
-class ProspectListView(APIView):
-    serializer_class = serializers.ProspectSerializer
 
-    def get(self, request):
-        prospects = models.Prospect.objects.all()
-        serializer = self.serializer_class(prospects, context={'request': request}, many=True)
+class ProspectListView(ListAPIView):
+    serializer_class = serializers.ProspectSerializer
+    pagination_class = SmallPagination
+
+    def get(self, request, *args, **kwargs):
+        clients = models.Prospect.objects.all()
+        serializer = self.serializer_class(clients, context={'request': request}, many=True)
+        page = self.paginate_queryset(serializer.data)
+        serializer = self.get_paginated_response(page)
         return Response({'success': True, 'data': serializer.data})
+
 
 class ProspectCreateView(APIView):
     serializer_class = serializers.ProspectSerializer
