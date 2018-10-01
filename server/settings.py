@@ -28,7 +28,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 ALLOWED_HOSTS = ['floating-brook-18937.herokuapp.com', '192.168.1.77', ]
 CORS_ORIGIN_WHITELIST = (
     '192.168.1.112:4200',
-    'abortive-yak.surge.sh',
+    'foregoing-money.surge.sh',
 )
 
 # Application definition
