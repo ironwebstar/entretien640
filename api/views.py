@@ -42,8 +42,6 @@ class ClientListView(ListAPIView):
         serializer = self.get_paginated_response(page)
         return Response({'success': True, 'data': serializer.data})
 
-
-
 class ClientCreateView(APIView):
     serializer_class = serializers.ClientSerializer
     def post(self, request):
@@ -127,12 +125,15 @@ class ClientEditAPIView(RetrieveUpdateDestroyAPIView):
         self.perform_destroy(instance)
         return Response({'success': True}, status=status.HTTP_204_NO_CONTENT)
 
-class EmployeeListView(APIView):
+class EmployeeListView(ListAPIView):
     serializer_class = serializers.EmployeeSerializer
+    pagination_class = SmallPagination
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         employees = models.Employee.objects.filter(is_admin=False)
         serializer = self.serializer_class(employees, context={'request': request}, many=True)
+        page = self.paginate_queryset(serializer.data)
+        serializer = self.get_paginated_response(page)
         return Response({'success': True, 'data': serializer.data})
 
 class EmployeeCreateView(APIView):
@@ -140,14 +141,33 @@ class EmployeeCreateView(APIView):
 
     def post(self, request):
         data = request.data
+
         if models.Employee.objects.filter(email=data.get('email')):
             data = 'existed_email'
             return Response({'success': False, 'data': data})
         position = data.get('position', '')
-        new_employee = models.Employee.objects.create(username=data.get('username'),
-                                                      password=make_password(data.get('password')),
-                                                      email=data.get('email'), position=position,
-                                                      Supervisor=data.get('Supervisor'), note=data.get('note'))
+
+        try:
+            email = data['email']
+            first_name = data['first_name']
+            last_name = data['last_name']
+            cell_phone = data.get('cell_phone', '')
+        except:
+            return Response(data={"error": "User doesn't have enough points."}, status=status.HTTP_400_BAD_REQUEST)
+
+        new_employee = models.Employee.objects.create(username=data.get('username', ''), first_name=first_name,
+                                                      last_name=last_name,
+                                                      password=make_password(data.get('password', '')),
+                                                      email=email, position=position,
+                                                      cell_phone=cell_phone, house_phone=data.get('house_phone', ''),
+                                                      Supervisor=data.get('Supervisor', ''), note=data.get('note', ''),
+                                                      employee_post=data.get('employee_post', ''),
+                                                      login_email=data.get('login_email', ''),
+                                                      hourly_salary=data.get('hourly_salary', 0),
+                                                      color=data.get('color', ''), remarks=data.get('remarks', ''),
+                                                      pre_payment_method=data.get('pre_payment_method', ''),
+                                                      animals=data.get('animals', ''),
+                                                    )
         new_employee.save()
         cur_employee = models.Employee.objects.get(email=data.get('email'))
         original = self.serializer_class(cur_employee)

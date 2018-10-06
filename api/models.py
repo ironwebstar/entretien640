@@ -11,10 +11,32 @@ class AdminUser(CustomUser):
         verbose_name_plural = 'Admin User'
 
 class Employee(CustomUser):
+    EMPLOYEE_POST = (
+        ('Préposé entretien ménager', 'Préposé entretien ménager'),
+        ('Superviseur', 'Superviseur'),
+        ('Administrateur', 'Administrateur'),
+    )
+    PREFERENTIAL_PAYMENT_METHOD = (
+        ('Argent comptant', 'Argent comptant'),
+        ('Chèque', 'Chèque'),
+        ('Dépôt direct', 'Dépôt direct'),
+    )
+    ANIMALS = (
+        ('Chat', 'Chat'),
+        ('Oiseaux', 'Oiseaux')
+    )
+
     is_admin = models.BooleanField(default=False)
     position = models.CharField(max_length=100, blank=True)
     Supervisor = models.CharField(max_length=100, blank=True)
     note = models.TextField(max_length=500, blank=True)
+    login_email = models.CharField(max_length=100, blank=True)
+    hourly_salary = models.IntegerField(blank=True, null=True)
+    color = models.CharField(max_length=100, blank=True, default='#FFF')
+    remarks = models.TextField(max_length=500, blank=True)
+    employee_post = models.CharField(max_length=45, choices=EMPLOYEE_POST, blank=True)
+    pre_payment_method = models.CharField(max_length=45, choices=PREFERENTIAL_PAYMENT_METHOD, blank=True)
+    animals = models.CharField(max_length=20, choices=ANIMALS, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -71,7 +93,7 @@ class Client(CustomUser):
     estimated_time = models.CharField(max_length=15, choices=ESTIMATED_VALUE, blank=True)
     replacement = models.CharField(max_length=30, choices=REPLACEMENT_OPTION, blank=True)
     days = models.CharField(max_length=5, choices=DAYS_OPTION, blank=True)
-    code_key = models.IntegerField(blank=True, null=True)
+    code_key = models.CharField(max_length=100, blank=True)
     animals = models.CharField(max_length=100, blank=True)
     payment = models.CharField(max_length=30, choices=PAYMENT_OPTION, blank=True)
     remarks = models.TextField(max_length=500, blank=True)
@@ -135,7 +157,7 @@ class Prospect(CustomUser):
     estimated_time = models.CharField(max_length=15, choices=ESTIMATED_VALUE, blank=True)
     replacement = models.CharField(max_length=30, choices=REPLACEMENT_OPTION, blank=True)
     days = models.CharField(max_length=5, choices=DAYS_OPTION, blank=True)
-    code_key = models.IntegerField(blank=True, null=True)
+    code_key = models.CharField(max_length=100, blank=True)
     animals = models.CharField(max_length=100, blank=True)
     payment = models.CharField(max_length=30, choices=PAYMENT_OPTION, blank=True)
     stage = models.CharField(max_length=15, choices=STAGES, blank=True)

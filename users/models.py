@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
     city = models.CharField(max_length=100, blank=True)
     province = models.CharField(max_length=200, blank=True)
     pays = models.CharField(max_length=100, blank=True)
+    # country = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.email

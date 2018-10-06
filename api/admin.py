@@ -15,6 +15,6 @@ class ClientAdmin(admin.ModelAdmin):
 admin.site.register(Client, ClientAdmin)
 
 class ProspectAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', 'last_contact', 'cell_phone', 'ip_address', 'stage')
+    list_display = ('id', 'first_name', 'last_name', 'username', 'email', 'last_contact', 'cell_phone', 'ip_address', 'stage')
 
 admin.site.register(Prospect, ProspectAdmin)
